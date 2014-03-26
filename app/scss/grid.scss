@@ -1,0 +1,65 @@
+* {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+// [class*="col"],
+[class*="grid"] {
+    width: 100%;
+    overflow: hidden;
+    float: left;
+    position: relative;
+
+    &:before {
+        content: " ";
+        padding-top: 100%;
+        display: block;
+    }
+
+    &:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+
+    .wrap {
+        height: 100%;
+        width: 100%;
+        @include rem-calc(padding, 10);
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .content {
+        height: 100%;
+        width: 100%;
+    }
+
+}
+
+.row {
+    width: 100%;
+
+    &:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+}
+
+@media #{$small} {
+    @include grid-maker(10, "small");
+}
+
+@media #{$medium} {
+    @include grid-maker(10, "medium");
+}
+
+@media #{$large} {
+    @include grid-maker(10, "large");
+}
+
+@media #{$xlarge} {
+    @include grid-maker(10, "xlarge");
+}

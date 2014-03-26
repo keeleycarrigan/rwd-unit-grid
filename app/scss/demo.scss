@@ -1,0 +1,27 @@
+body {
+    padding: 1.5rem;
+}
+
+.container {
+    width: 100%;
+    @include rem-calc(max-width, 980);
+    @include rem-calc(margin, 50, auto);
+
+    &:after {
+        content: " ";
+        display: table;
+        clear: both;
+    }
+
+    @media #{$large} {
+        width: 90%;
+    }
+
+    @media #{$xlarge} {
+        width: 85%;
+    }
+}
+
+.content {
+    background-color: #FE8173;
+}

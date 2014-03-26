@@ -1,0 +1,90 @@
+$grid-padding: 15;
+
+@mixin rem-calc ($property, $values...) {
+	$max: length($values);
+	$pxValues: '';
+	$remValues: '';
+
+	@for $i from 1 through $max {
+		$value: nth($values, $i);
+
+		@if $value == "auto" {
+			$pxValues: #{$pxValues + $value};
+		} @else {
+			$pxValues: #{$pxValues + $value}px;
+		}
+
+		@if $i < $max {
+			$pxValues: #{$pxValues + " "};
+		}
+	}
+
+	@for $i from 1 through $max {
+		$value: nth($values, $i);
+
+		@if $value == "auto" {
+			$remValues: #{$remValues + $value};
+		} @else {
+			$remValues: #{$remValues + $value / 16}rem;
+		}
+		
+
+		@if $i < $max {
+			$remValues: #{$remValues + " "};
+		}
+	}
+
+	#{$property}: $pxValues;
+	#{$property}: $remValues;
+}
+
+@mixin border ($side, $size, $type, $color) {
+
+	@if $side != "border" {
+		$side: #{"border-" + $side};
+	}
+	
+	#{$side}: #{$size}px #{$type} #{$color};
+	#{$side}: #{$size / 16}rem #{$type} #{$color};
+}
+
+@mixin gradient($top, $bottom) {
+	background: #{$top}; /* Old browsers */
+	background: -moz-linear-gradient(top, #{$top} 0%, #{$bottom} 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#{$top}), color-stop(100%,#{$bottom})); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #{$top} 0%,#{$bottom} 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #{$top} 0%,#{$bottom} 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #{$top} 0%,#{$bottom} 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #{$top} 0%,#{$bottom} 100%); /* W3C */
+}
+
+@mixin translate3($x, $y, $z) {
+	-webkit-transform: translate3d(#{$x}, #{$y}, #{$z});
+	transform: translate3d(#{$x}, #{$y}, #{$z});
+}
+
+@mixin grid-maker($unit, $media) {
+	@for $i from 1 through $unit {
+
+		$col: #{"." + $media + "-grid-" + $i};
+		$width: #{$i * $unit + "%"};
+
+		@for $j from 1 through $unit {
+			$padTop: (100 / $i) * $j;
+
+			#{$col}-#{$j} {
+				width: #{$width};
+				&:before {
+					padding-top: #{$padTop + "%"};
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
